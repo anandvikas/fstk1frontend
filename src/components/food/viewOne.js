@@ -4,6 +4,7 @@ import useRequest from "../../hooks/useRequest";
 import AddToCart from "../cart/add";
 import AddToWishlist from "../wishlist/add";
 import AddReview from "../reviews/add";
+import ViewReviews from "../reviews/view";
 
 const ViewOne = () => {
   const { id } = useParams();
@@ -32,7 +33,8 @@ const ViewOne = () => {
         <AddToWishlist itemId={foodData._id} />
         <div>
           <h1>Reviews</h1>
-          <AddReview />
+          <ViewReviews itemId={foodData._id} />
+          <AddReview itemId={foodData._id} />
         </div>
       </div>
     )

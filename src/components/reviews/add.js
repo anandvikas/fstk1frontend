@@ -3,17 +3,43 @@ import { useForm } from "react-hook-form";
 import useRequest from "../../hooks/useRequest";
 import { useSelector } from "react-redux";
 
-const AddReview = () => {
-  const { userId } = useSelector((state) => state.reducer1.loggedIn);
+const AddReview = ({ itemId }) => {
+  const { userId, userName } = useSelector((state) => state.reducer1.loggedIn);
   const { register, handleSubmit } = useForm();
   const { request, response } = useRequest();
-  const [resMessage, setResMessage] = useState(<></>);
+
+  let isValidate = true;
+
+  const frontEndvalidation = (data) => {
+    if (data.rating === "") {
+      isValidate = false;
+      alert("rating can't be empty");
+    }
+    return;
+  };
+  const makePostBody = (data) => {
+    return {
+      userName: userName,
+      userId: userId,
+      itemId: itemId,
+      rating: parseInt(data.rating),
+      message: data.message,
+    };
+  };
   const submitForm = (data) => {
-    console.log(data);
+    isValidate = true;
+    // console.log(data);
+    frontEndvalidation(data);
+    if (isValidate) {
+      let postBody = makePostBody(data);
+      // console.log(postBody);
+      request("POST", "/reviews/addReview", postBody);
+    }
   };
   useEffect(() => {
     if (response) {
-      setResMessage(response.message);
+      alert(response.message);
+      window.location.reload();
     }
   }, [response]);
   return (
@@ -28,7 +54,6 @@ const AddReview = () => {
           <input type="submit" value="submit" />
         </div>
       </form>
-      <p>{resMessage}</p>
     </div>
   );
 };
