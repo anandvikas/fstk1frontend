@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import { NonPrivateRoutes, Privateroutes } from "./utils/routes";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
   getCartAction,
   getWishlistAction,
 } from "./store/actionCreators/actionCreator";
-import Navbar from "./components/navbar/navbar";
+import NavPrivate from "./components/navbar/navPrivate"
 import useRequest from "./hooks/useRequest";
 
 const App = () => {
@@ -38,12 +38,12 @@ const App = () => {
   }, [userDetails]);
   //---------------------------------------------------------------------------
   return (
-    <>
-      {/* <Navbar /> */}
-      <Routes>
+    <>     
         {loggedIn.status ? (
           <>
-            {Privateroutes.map((element, index) => {
+          <NavPrivate/>
+          <Routes>
+          {Privateroutes.map((element, index) => {
               return (
                 <Route
                   key={index}
@@ -52,9 +52,11 @@ const App = () => {
                 />
               );
             })}
+          </Routes>            
           </>
         ) : (
           <>
+            <Routes>
             {NonPrivateRoutes.map((element, index) => {
               return (
                 <Route
@@ -64,9 +66,10 @@ const App = () => {
                 />
               );
             })}
+            </Routes>
           </>
         )}
-      </Routes>
+      
     </>
   );
 };

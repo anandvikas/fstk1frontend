@@ -21,6 +21,9 @@ const ViewOne = () => {
   return (
     foodData && (
       <div>
+        <div style={{width:'150px'}}>
+                <img src={foodData.images[0].src} alt={foodData.images[0].alt} style={{width:'100%'}}/>
+              </div>
         <h4>Name : {foodData.name}</h4>
         <h4>Catagory : {foodData.catagory}</h4>
         <h4>
