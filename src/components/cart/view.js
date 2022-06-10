@@ -14,6 +14,7 @@ const CartItems = ({ item, userId }) => {
   useEffect(() => {
     if (response) {
       setItemDetail(response);
+      
     }
   }, [response]);
   const rmFromCart = () => {
@@ -37,14 +38,14 @@ const CartItems = ({ item, userId }) => {
   );
 };
 
-const ViewCart = () => {
+const ViewCart = () => {  
   const { items, userId } = useSelector((state) => state.reducer1.userCart);
 
   return (
     <div>
       {items.map((val) => {
         return <CartItems key={val.itemId} item={val} userId={userId} />;
-      })}
+      })}     
     </div>
   );
 };

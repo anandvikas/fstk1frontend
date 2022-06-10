@@ -27,11 +27,11 @@ const AddToCart = ({ itemId }) => {
 
   return isAdded ? (
     <>
-      <button>Added to cart</button>
+      <button id='addToCart'>Added to cart</button>
     </>
   ) : (
     <>
-      <button onClick={addToCart}>Add to Cart</button>
+      <button id='addToCart' onClick={addToCart}>Add to Cart</button>
     </>
   );
 };

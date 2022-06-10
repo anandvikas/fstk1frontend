@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useRequest from "../../hooks/useRequest";
 import { useSelector } from "react-redux";
 
+
 const AddReview = ({ itemId }) => {
   const { userId, userName } = useSelector((state) => state.reducer1.loggedIn);
   const { register, handleSubmit } = useForm();
@@ -43,15 +44,14 @@ const AddReview = ({ itemId }) => {
     }
   }, [response]);
   return (
-    <div>
+    <div className='csformdiv'>
       <form onSubmit={handleSubmit(submitForm)}>
         <h4>Add review</h4>
-        <div>
-          <input type="number" placeholder="rating" {...register("rating")} />
-          <input type="text" placeholder="message" {...register("message")} />
-        </div>
-        <div>
-          <input type="submit" value="submit" />
+        <input className="emailField" type="number" placeholder="rating" {...register("rating")} />        
+        <label htmlFor="psw">Message</label>
+        <textarea className='meField' type="text" placeholder="message" {...register("message")} />
+        <div className="csButton">
+          <input type="submit" value="submit" id="csSubmit"/>
         </div>
       </form>
     </div>

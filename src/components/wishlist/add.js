@@ -17,11 +17,11 @@ const AddToWishlist = ({ itemId }) => {
 
   return items.includes(itemId) ? (
     <>
-      <button>Added to wishlist</button>
+      <button id='addToWishlist'>Added to wishlist</button>
     </>
   ) : (
     <>
-      <button onClick={addToWishlist}>Add to wishlist</button>
+      <button id='addToWishlist' onClick={addToWishlist}>Add to wishlist</button>
     </>
   );
 };
