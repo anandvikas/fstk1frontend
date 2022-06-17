@@ -8,6 +8,8 @@ import {
   getWishlistAction,
   loginAction,
 } from "../../store/actionCreators/actionCreator";
+import "./loginSignup.css"
+import SocialOauth from "../socialOauth/socialOauth";
 
 const LoginUseform = () => {
   const { register, handleSubmit } = useForm();
@@ -19,7 +21,7 @@ const LoginUseform = () => {
   const [resMessage, setResMessage] = useState(<></>);
   // --------------------------------------------------------------------------------------
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn.status) {
       navigate("/");
     }
   }, []);
@@ -63,27 +65,37 @@ const LoginUseform = () => {
   // --------------------------------------------------------------------------------------
   return (
     <>
-      <div>
-        <h3>User Login</h3>
-        <form onSubmit={handleSubmit(submitForm)}>
-          <div>
+      <div className="formContainer">
+        <div className="loginHolder">
+          <form onSubmit={handleSubmit(submitForm)}>
+            <h1 className="formTitle">Log In</h1>
+            <p className="formPara">Please fill in this form to log in.</p>
+            <hr />
+            <label htmlFor="userName" className="lsFormLabel">User name</label>
             <input
+              className="formInput"
               type="text"
               placeholder="User Name"
+              name='userName'
               {...register("userName")}
             />
+            <label htmlFor="password" className="lsFormLabel">Password</label>
             <input
+              className="formInput"
               type="password"
               placeholder="Password"
+              name='password'
               {...register("password")}
             />
-          </div>
-          <div>
-            <input type="submit" value="Login" />
-          </div>
-        </form>
-        <p>{resMessage}</p>
-        <Link to="/forgotPassword">Forgot Password</Link>
+            <div className="formButtons">              
+              <input type="submit" value="Login" id="formLogin" />
+            </div>
+          </form>
+          <p>{resMessage}</p>
+          <Link to="/forgotPassword">Forgot Password</Link>
+          <Link className='loginSignupToggle' to='/signup'>Dont have an account</Link>
+          <SocialOauth />
+        </div>
       </div>
     </>
   );

@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addCartAction } from "../../store/actionCreators/actionCreator";
 
 const AddToCart = ({ itemId }) => {
-  const { userId, items } = useSelector((state) => state.reducer1.userCart);
+  const { userCart, loggedIn } = useSelector((state) => state.reducer1);
+  const { userId, items } = userCart
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const addToCart = () => {
-    dispatch(
-      addCartAction({
-        userId: userId,
-        itemId: itemId,
-      })
-    );
-  };
+    if (loggedIn.status) {
+      dispatch(
+        addCartAction({
+          userId: userId,
+          itemId: itemId,
+        })
+      );
+    } else {
+      alert("you must Log-in to add to cart")
+      navigate('/login')
+    }
 
+  };
   // this will check the item is added to cart or not
   const [isAdded, setIsAdded] = useState(null);
   useEffect(() => {
     setIsAdded(
       items.find((val) => {
-        return val.itemId === itemId;
+        return val.item._id === itemId;
       })
     );
   }, [items]);
@@ -30,10 +38,10 @@ const AddToCart = ({ itemId }) => {
       <button id='addToCart'>Added to cart</button>
     </>
   ) : (
-    <>
-      <button id='addToCart' onClick={addToCart}>Add to Cart</button>
-    </>
-  );
+      <>
+        <button id='addToCart' onClick={addToCart}>Add to Cart</button>
+      </>
+    );
 };
 
 export default AddToCart;

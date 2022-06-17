@@ -5,9 +5,11 @@ import AddToCart from "../cart/add";
 import AddToWishlist from "../wishlist/add";
 import AddReview from "../reviews/add";
 import ViewReviews from "../reviews/view";
+import { useSelector } from "react-redux";
 import "./viewOne.css"
 
 const ViewOne = () => {
+  const { status } = useSelector((state) => state.reducer1.loggedIn);
   const { id } = useParams();
   const { request, response } = useRequest();
   const [foodData, setFoodData] = useState(null);
@@ -45,11 +47,10 @@ const ViewOne = () => {
 
         </div>
         <div className='rvCon'>
-          
-          <AddReview itemId={foodData._id} />
-          <hr/>
+          {status && <AddReview itemId={foodData._id} />}
+          <hr />
           <h2>Reviews</h2>
-          <ViewReviews itemId={foodData._id} />          
+          <ViewReviews itemId={foodData._id} />
         </div>
       </>
 

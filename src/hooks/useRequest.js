@@ -10,10 +10,10 @@ const useRequest = () => {
       url,
       data,
     };
-    console.log(config);
+    // console.log(config);
     axios(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setResponse(res.data);
       })
       .catch((err) => {

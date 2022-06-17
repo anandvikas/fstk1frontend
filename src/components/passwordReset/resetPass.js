@@ -48,26 +48,30 @@ const ResetPass = () => {
     }
   }, [response]);
   return (
-    <div>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <div>
+    <div className="formContainer">
+      <div className="loginHolder">
+        <form onSubmit={handleSubmit(submitForm)}>
+          <h1 className="formTitle">Forgot Password</h1>
+          <p className="formPara">Enter the new password</p>
           <input
+            className="formInput"
             type="text"
             placeholder="New Password"
             {...register("password")}
           />
           <br />
           <input
+            className="formInput"
             type="password"
             placeholder="Repeat New Password"
             {...register("rpassword")}
           />
-        </div>
-        <div>
-          <input type="submit" value="submit" />
-        </div>
-      </form>
-      <p>{resMessage}</p>
+          <div className="formButtons">
+            <input type="submit" value="submit" id="formLogin" />
+          </div>
+        </form>
+        <p>{resMessage}</p>
+      </div>
     </div>
   );
 };

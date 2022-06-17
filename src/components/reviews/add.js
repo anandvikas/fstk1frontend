@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 
 const AddReview = ({ itemId }) => {
-  const { userId, userName } = useSelector((state) => state.reducer1.loggedIn);
+  const { userId, userName} = useSelector((state) => state.reducer1.loggedIn);
   const { register, handleSubmit } = useForm();
   const { request, response } = useRequest();
 

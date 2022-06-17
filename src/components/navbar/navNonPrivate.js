@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, {useState} from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css"
 import MenuIcon from "@mui/icons-material/Menu";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import AccountMenu from "./accountMenu.js"
 import logo from "../../assets/logo.png"
 
 
-const NavPrivate = () => {
+
+const NavNonPrivate = () => {
+  const navigate = useNavigate()
   // this will toggle the visibility of responsive navbar
   const [state, update] = useState("section2");
   function toggle() {
@@ -29,7 +30,7 @@ const NavPrivate = () => {
       <nav className="navCon">
         <div className="section1">
           <NavLink to="/" className="navLogoCon">
-            <img src={logo} alt='Logo' />
+          <img src={logo} alt='Logo' />
             <h1>Food-cart</h1>
           </NavLink>
           <div className="navResCon">
@@ -52,14 +53,16 @@ const NavPrivate = () => {
             <NavLink to="/contact" className="links">
               Contact
             </NavLink>
-            <NavLink to="/customer_support" className="links">Customer Support</NavLink>
           </div>
           <div className="sec2component" id="navLogCon">
-            <AccountMenu />
+            <button id="login" onClick={()=>{navigate("/login")}}>
+              Login
+            </button>            
           </div>
         </div>
       </nav>
     </section>
-  );
+  );  
 };
-export default NavPrivate;
+
+export default NavNonPrivate;

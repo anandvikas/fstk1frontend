@@ -24,7 +24,7 @@ export const updateCartAction = (data) => {
     payLoad: data,
   };
 };
-//-----------------------------------------------------------------
+//-----------------------------------------------------------------------------
 export const getCartAction = (data) => {
   const config = {
     method: "POST",
@@ -53,7 +53,7 @@ export const addCartAction = (data) => {
   return (dispatch) => {
     axios(config)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(updateCartAction(res.data));
       })
       .catch((error) => {
@@ -117,7 +117,7 @@ export const getWishlistAction = (data) => {
   return (dispatch) => {
     axios(config)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(updateWishlistAction(res.data));
       })
       .catch((error) => {

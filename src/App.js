@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import { NonPrivateRoutes, Privateroutes } from "./utils/routes";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,8 @@ import {
 } from "./store/actionCreators/actionCreator";
 import NavPrivate from "./components/navbar/navPrivate"
 import useRequest from "./hooks/useRequest";
+import NavNonPrivate from "./components/navbar/navNonPrivate";
+import Footer from "./components/footer/footer";
 
 const App = () => {
   const { loggedIn } = useSelector((state) => state.reducer1);
@@ -23,8 +25,7 @@ const App = () => {
     }
   }, []);
   useEffect(() => {
-    if (response) {
-      console.log(response);
+    if (response) {      
       setUserDetails(response);
     }
   }, [response]);
@@ -38,38 +39,39 @@ const App = () => {
   }, [userDetails]);
   //---------------------------------------------------------------------------
   return (
-    <>     
-        {loggedIn.status ? (
-          <>
-          <NavPrivate/>
+    <>
+      {loggedIn.status ? (
+        <>
+          <NavPrivate />
           <Routes>
-          {Privateroutes.map((element, index) => {
+            {Privateroutes.map((element, index) => {
               return (
                 <Route
                   key={index}
                   path={element.path}
                   element={<element.component />}
-                />
+                />                
               );
-            })}
-          </Routes>            
-          </>
-        ) : (
+            })}            
+          </Routes>
+        </>
+      ) : (
           <>
+            <NavNonPrivate />
             <Routes>
-            {NonPrivateRoutes.map((element, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={element.path}
-                  element={<element.component />}
-                />
-              );
-            })}
+              {NonPrivateRoutes.map((element, index) => {
+                return (
+                  <Route
+                    key={index}
+                    path={element.path}
+                    element={<element.component />}
+                  />
+                );
+              })}
             </Routes>
           </>
         )}
-      
+      <Footer />
     </>
   );
 };

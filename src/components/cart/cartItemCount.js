@@ -6,13 +6,13 @@ const CartItemCount = ({ item, userId }) => {
   const dispatch = useDispatch();
 
   const decrease = () => {
-    if (item.quantity <= 0) {
+    if (item.quantity <= 1) {
       return;
     }
     dispatch(
       cartItemCountAction({
         userId: userId,
-        itemId: item.itemId,
+        itemId: item.item._id,
         quantity: item.quantity - 1,
       })
     );
@@ -24,18 +24,18 @@ const CartItemCount = ({ item, userId }) => {
     dispatch(
       cartItemCountAction({
         userId: userId,
-        itemId: item.itemId,
+        itemId: item.item._id,
         quantity: item.quantity + 1,
       })
     );
   };
 
   return (
-    <span>
+    <div className='pmBtn'>
       <button onClick={decrease}>-</button>
       <span>{item.quantity}</span>
       <button onClick={increase}>+</button>
-    </span>
+    </div>
   );
 };
 
